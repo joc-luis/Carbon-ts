@@ -1,6 +1,6 @@
 {
   "name": "carbon-ts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A datetime library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,7 @@
   "scripts": {
     "start": "tsc src/index.ts && node src/index.js",
     "build": "npx tsc",
-    "prerelease" : "npm run build && npm version prerelease && npm publish",
+    "prerelease": "npm run build && npm version prerelease && npm publish",
     "patch": "npm run build && npm version patch && npm publish",
     "minor": "npm run build && npm version minor && npm publish",
     "major": "npm run build && npm version major && npm publish"
