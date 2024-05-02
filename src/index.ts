@@ -1,9 +1,4 @@
-import {DateTime} from "./date-time";
-import {TimeZoneEnum} from "./enum/time-zone-enum";
-import {TimeSpan} from "./interfaces/time-span";
-
-export {
-    DateTime,
-    TimeZoneEnum,
-    TimeSpan
-}
+export {DateTime} from "./date-time"
+export {TimeSpan} from "./interfaces/time-span"
+export {LocaleEnum} from "./enum/locale-enum";
+export {TimeZoneEnum} from "./enum/time-zone-enum"

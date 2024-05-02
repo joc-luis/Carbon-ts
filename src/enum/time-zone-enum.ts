@@ -1,5 +1,5 @@
 export enum TimeZoneEnum {
-    UTC,
+    UTC = "UTC",
     EuropeAndorra = 'Europe/Andorra',
     AsiaDubai = 'Asia/Dubai',
     AsiaKabul = 'Asia/Kabul',

@@ -2,10 +2,15 @@
   "name": "carbon-ts",
   "version": "1.0.0",
   "description": "A datetime library",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "start": "tsc src/index.ts && node src/index.js",
-    "build": "tsc --build tsconfig.json",
+    "build": "npx tsc",
     "patch": "npm run build && npm version patch && npm publish",
     "minor": "npm run build && npm version minor && npm publish",
     "major": "npm run build && npm version major && npm publish"
