@@ -1,0 +1,23 @@
+{
+  "name": "carbon-ts",
+  "version": "1.0.0",
+  "description": "A datetime library",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "tsc src/index.ts && node src/index.js",
+    "build": "tsc --build tsconfig.json",
+    "patch": "npm run build && npm version patch && npm publish",
+    "minor": "npm run build && npm version minor && npm publish",
+    "major": "npm run build && npm version major && npm publish"
+  },
+  "keywords": [
+    "date",
+    "datetime"
+  ],
+  "author": "joc-luis",
+  "license": "MIT",
+  "devDependencies": {
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
