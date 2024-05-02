@@ -194,8 +194,8 @@ export class DateTime {
         switch (this.dateTime.toString().split(" ")[0]) {
             case "Mon":
                 return "Monday"
-            case "Tuesday":
-                return "Tue";
+            case "Tue":
+                return "Tuesday";
             case "Wed":
                 return "Wednesday";
             case "Thu":
@@ -204,7 +204,7 @@ export class DateTime {
                 return "Friday";
             case "Sat":
                 return "Saturday";
-            case "Sunday":
+            case "Sun":
                 return "Sunday";
             default:
                 throw new Error()
@@ -472,7 +472,6 @@ export class DateTime {
      *
      * @return Datetime of the current instance
      */
-
     public getISO() {
         return `${this.getDate()}T${this.getTime()}.000Z`;
     }
