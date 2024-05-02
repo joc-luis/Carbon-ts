@@ -1,6 +1,6 @@
 {
   "name": "carbon-ts",
-  "version": "2.0.1-0",
+  "version": "2.0.1-1",
   "description": "A datetime library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
