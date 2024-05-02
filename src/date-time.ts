@@ -6,10 +6,16 @@ export class DateTime {
     private dateTime: Date = new Date();
     private timeZone: TimeZoneEnum = TimeZoneEnum.UTC;
     private locale: LocaleEnum = LocaleEnum.enUS;
+
     private convertToTimezone(): Date {
         return new Date(this.dateTime.toLocaleString(this.locale as string, {timeZone: this.timeZone as string}));
     }
 
+    /**
+     * Create a new instance with the specified time zone and format
+     * @param timeZone Time zone for the instance
+     * @param locale Specifies the format to use for the date
+     */
     constructor(timeZone: TimeZoneEnum = TimeZoneEnum.UTC, locale: LocaleEnum = LocaleEnum.enUS) {
         this.dateTime = new Date();
         this.timeZone = timeZone;
@@ -17,93 +23,173 @@ export class DateTime {
     }
 
     /**
-     * Create a new instance of DateTime with current time and selected timezone;
+     * Create a new instance with the specified time zone and format
      * @param timeZone Time zone for the instance
-     * @param locale Time zone for the instance
+     * @param locale Specifies the format to use for the date
      */
-
     public static now(timeZone: TimeZoneEnum = TimeZoneEnum.UTC, locale: LocaleEnum = LocaleEnum.enUS): DateTime {
         return new DateTime(timeZone, locale)
     }
 
+
+    /**
+     * Change the time zone and format
+     * @param timeZone Time zone for the instance
+     * @param locale Specifies the format to use for the date
+     */
     public changeTimeZone(timeZone: TimeZoneEnum, locale: LocaleEnum) {
         this.timeZone = timeZone;
         this.locale = locale;
     }
 
+    /**
+     * Assigns the date and time to the current instance
+     * @param year Year
+     * @param month Month
+     * @param day Day
+     * @param hour Hour
+     * @param minute Minute
+     * @param second Second
+     */
     public setDateTime(year: number, month: number, day: number, hour: number, minute: number, second: number): void {
         this.dateTime = new Date(year, month - 1, day, hour, minute, second);
     }
 
+
+    /**
+     * Add a second to the current instance.
+     */
     public addSecond(): void {
         this.dateTime.setSeconds(this.dateTime.getSeconds() + 1);
     }
 
+    /**
+     * Adds the specified seconds to the current instance
+     * @param seconds Seconds to add
+     */
     public addSeconds(seconds: number) {
         this.dateTime.setSeconds(this.dateTime.getSeconds() + seconds);
     }
 
+    /**
+     * Add a minute to the current instance.
+     */
     public addMinute(): void {
         this.dateTime.setMinutes(this.dateTime.getMinutes() + 1);
     }
 
+    /**
+     * Adds the specified minutes to the current instance
+     * @param minutes Minutes to add
+     */
     public addMinutes(minutes: number) {
         this.dateTime.setMinutes(this.dateTime.getMinutes() + minutes);
     }
 
+    /**
+     * Add an hour to the current instance.
+     */
     public addHour(): void {
         this.dateTime.setHours(this.dateTime.getHours() + 1);
     }
 
-    public addHours(minutes: number) {
-        this.dateTime.setHours(this.dateTime.getHours() + minutes);
+    /**
+     * Adds the specified hours to the current instance
+     * @param hours Minutes to add
+     */
+    public addHours(hours: number) {
+        this.dateTime.setHours(this.dateTime.getHours() + hours);
     }
 
-
+    /**
+     * Add a day to the current instance.
+     */
     public addDay(): void {
         this.dateTime.setDate(this.dateTime.getDate() + 1);
     }
 
+    /**
+     * Adds the specified days to the current instance
+     * @param days Minutes to add
+     */
     public addDays(days: number) {
         this.dateTime.setDate(this.dateTime.getDate() + days);
     }
 
+    /**
+     * Add a month to the current instance.
+     */
     public addMonth(): void {
         this.dateTime.setMonth(this.dateTime.getMonth() + 1);
     }
 
+    /**
+     * Adds the specified months to the current instance
+     * @param months Minutes to add
+     */
     public addMonths(months: number) {
         this.dateTime.setMonth(this.dateTime.getMonth() + months);
     }
 
+    /**
+     * Add a year to the current instance.
+     */
     public addYear(): void {
         this.dateTime.setMonth(this.dateTime.getMonth() + 12);
     }
 
+    /**
+     * Adds the specified months to the current instance
+     * @param years Minutes to add
+     */
     public addYears(years: number) {
         this.dateTime.setMonth(this.dateTime.getMonth() + (12 * years));
     }
 
+    /**
+     * Get the current timezone for the instance
+     * @return Return the timezone
+     */
     public getTimeZone(): TimeZoneEnum {
         return this.timeZone;
     }
 
+    /**
+     * Get the current second
+     * @return Get the second
+     */
     public getSecond(): number {
         return this.convertToTimezone().getSeconds();
     }
 
+    /**
+     * Get the current minute
+     * @return Get the minute
+     */
     public getMinute(): number {
         return this.convertToTimezone().getMinutes();
     }
 
+    /**
+     * Get the current hour
+     * @return Get the hour
+     */
     public getHour(): number {
         return this.convertToTimezone().getHours();
     }
 
+    /**
+     * Get the current day
+     * @return Get the day
+     */
     public getDay(): number {
         return this.convertToTimezone().getDay();
     }
 
+    /**
+     * Get the name of the current day
+     * @return Name of the day
+     */
     public getDayName(): string {
         switch (this.dateTime.toString().split(" ")[0]) {
             case "Mon":
@@ -125,10 +211,19 @@ export class DateTime {
         }
     }
 
+    /**
+     * Get the current month
+     * @return Get month
+     */
     public getMonth(): number {
         return this.convertToTimezone().getMonth() + 1;
     }
 
+
+    /**
+     * Get the name of the current
+     * @return Name of the month
+     */
     public getMonthName(): string {
         switch (this.convertToTimezone().getMonth()) {
             case 0:
@@ -161,67 +256,139 @@ export class DateTime {
         }
     }
 
+
+    /**
+     * Get the current year
+     * @return Total year
+     */
     public getYear(): number {
         return this.convertToTimezone().getFullYear();
     }
 
+    /**
+     * Get the total milliseconds of the UTC time
+     * @return Total milliseconds
+     */
     public getTotalMilliseconds(): number {
         return this.convertToTimezone().getTime();
     }
 
+    /**
+     * Get the total seconds of the UTC time
+     * @return Total seconds
+     */
     public getTotalSeconds(): number {
         return parseFloat(Number(this.convertToTimezone().getTime() / 1000).toFixed(2));
     }
 
+    /**
+     * Get the total minutes of the UTC time
+     * @return Total minutes
+     */
     public getTotalMinutes(): number {
         return parseFloat(Number(this.convertToTimezone().getTime() / (1000 * 60)).toFixed(2));
     }
 
+    /**
+     * Get the total hours of th UTC time
+     * @return Total hours
+     */
     public getTotalHours(): number {
         return parseFloat(Number(this.convertToTimezone().getTime() / (1000 * 3600)).toFixed(2));
     }
 
+    /**
+     * Get the total days of th UTC time
+     * @return Total days
+     */
     public getTotalDays(): number {
         return parseFloat(Number(this.convertToTimezone().getTime() / ((1000 * 3600) * 24)).toFixed(2));
     }
 
+    /**
+     * Get the total months of th UTC time
+     * @return Total months
+     */
     public getTotalMonths(): number {
         return this.convertToTimezone().getUTCMonth()
     }
 
+    /**
+     * Get the total years of th UTC time
+     * @return Total years
+     */
     public getTotalYears(): number {
         return this.convertToTimezone().getUTCFullYear()
     }
 
+    /**
+     * Get the difference in milliseconds of two dates
+     * @param dateTime Date to compare
+     * @return Milliseconds of the difference.
+     */
     public diffInMilliseconds(dateTime: DateTime): number {
         return this.getTotalMilliseconds() - dateTime.getTotalMilliseconds();
     }
 
+    /**
+     * Get the difference in seconds of two dates
+     * @param dateTime Date to compare
+     * @return Seconds of the difference.
+     */
     public diffInSeconds(dateTime: DateTime): number {
         return this.getTotalSeconds() - dateTime.getTotalSeconds();
     }
 
+    /**
+     * Get the difference in minutes of two dates
+     * @param dateTime Date to compare
+     * @return Minutes of the difference.
+     */
     public diffInMinutes(dateTime: DateTime): number {
         return this.getTotalMinutes() - dateTime.getTotalMinutes();
     }
 
+    /**
+     * Get the difference in hours of two dates
+     * @param dateTime Date to compare
+     * @return Hours of the difference.
+     */
     public diffInHours(dateTime: DateTime): number {
         return this.getTotalHours() - dateTime.getTotalHours();
     }
 
+    /**
+     * Get the difference in days of two dates
+     * @param dateTime Date to compare
+     * @return Days of the difference.
+     */
     public diffInDays(dateTime: DateTime): number {
         return this.getTotalDays() - dateTime.getTotalDays();
     }
 
+    /**
+     * Get the difference in months of two dates
+     * @param dateTime Date to compare
+     * @return Months of the difference.
+     */
     public diffInMonths(dateTime: DateTime): number {
         return this.getTotalMonths() - dateTime.getTotalMonths();
     }
 
+    /**
+     * Get the difference in years of two dates
+     * @param dateTime Date to compare
+     * @return Years of the difference.
+     */
     public diffInYears(dateTime: DateTime): number {
         return this.getYear() - dateTime.getYear();
     }
 
-
+    /**
+     * Get the difference in time of two dates
+     * @param dateTime Date to compare
+     * @return A time range object with the difference between the two dates.
+     */
     public diffInTime(dateTime: DateTime): TimeSpan {
         let total = this.getTotalMilliseconds() - dateTime.getTotalMilliseconds()
         const timeSpan: TimeSpan = {
@@ -254,17 +421,59 @@ export class DateTime {
         return timeSpan;
     }
 
+
+    /**
+     * Get the datetime of the instance in the format of the locale
+     *
+     * @return Datetime of the current instance
+     */
     public toString(): string {
         return this.convertToTimezone().toLocaleString()
     }
 
+
+    /**
+     * Get the time on 24 format
+     *
+     * @return Time of the current instance
+     */
     public getTime(): string {
-        return this.convertToTimezone().toLocaleTimeString()
+
+        const time = this.convertToTimezone().toLocaleTimeString().split(" ");
+        const hour: number = parseInt(time[0].split(":")[0]);
+        const minute: number = parseInt(time[0].split(":")[1]);
+        const second: number = parseInt(time[0].split(":")[2]);
+
+        if (time[1] == "AM") {
+            return `${hour <= 9 ? '0' : ''}${hour}:${minute <= 9 ? '0' : ''}${minute}:${second <= 9 ? '0' : ''}${second}`
+        }
+
+        return `${hour + 12}:${minute <= 9 ? '0' : ''}${minute}:${second <= 9 ? '0' : ''}${second}`
+
     }
 
+    /**
+     * Get the date
+     *
+     * @return Date of the current instance
+     */
     public getDate(): string {
-        return this.convertToTimezone().toLocaleDateString()
+        const date = this.convertToTimezone().toLocaleDateString().split("/");
+        const day = parseInt(date[0]);
+        const month = parseInt(date[1]);
+        const year = date[2];
+
+        return `${year}-${month <= 9 ? '0' : ''}${month}-${day <= 9 ? '0' : ''}${day}`
+
     }
 
+    /**
+     * Get the datetime on ISO format.
+     *
+     * @return Datetime of the current instance
+     */
 
+    public getISO() {
+        return `${this.getDate()}T${this.getTime()}.000Z`;
+    }
 }
