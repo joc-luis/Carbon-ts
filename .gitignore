@@ -260,3 +260,4 @@ src/enum/time-zone-enum.js
 src/interfaces/time-span.js
 src/date-time.js
 src/index.js
+*.js

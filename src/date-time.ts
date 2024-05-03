@@ -1,6 +1,7 @@
 import {TimeZoneEnum} from "./enum/time-zone-enum";
 import {TimeSpan} from "./interfaces/time-span";
 import {LocaleEnum} from "./enum/locale-enum";
+import {DateTimeFormatEnum} from "./enum/date-time-format-enum";
 
 export class DateTime {
     private dateTime: Date = new Date();
@@ -183,7 +184,7 @@ export class DateTime {
      * @return Get the day
      */
     public getDay(): number {
-        return this.convertToTimezone().getDay();
+        return this.convertToTimezone().getDate();
     }
 
     /**
@@ -472,7 +473,26 @@ export class DateTime {
      *
      * @return Datetime of the current instance
      */
-    public getISO() {
-        return `${this.getDate()}T${this.getTime()}.000Z`;
+    public toISO() {
+        return `${this.getYear()}-${this.getMonth() <= 9 ? '0'+this.getMonth() : this.getMonth()}-${this.getDay() <= 9 ? '0'+this.getDay() : this.getDay()}T${this.getTime()}.000Z`;
+    }
+
+    public toFormat(format: string): string {
+        return format
+            .replace(DateTimeFormatEnum.FullYear as string, this.getYear().toString())
+            .replace(DateTimeFormatEnum.TwoDigitsYear as string, this.getYear().toString().substring(2))
+            .replace(DateTimeFormatEnum.NameMonth as string, this.getMonthName())
+            .replace(DateTimeFormatEnum.TwoDigitsMonth as string, this.getMonth() <= 9 ? `0${this.getMonth()}` : this.getMonth().toString())
+            .replace(DateTimeFormatEnum.Month as string, this.getMonth().toString())
+            .replace(DateTimeFormatEnum.NameDay as string, this.getDayName())
+            .replace(DateTimeFormatEnum.TwoDigitsDay as string, this.getDay() <= 9 ? `0${this.getDay()}` : this.getDay().toString())
+            .replace(DateTimeFormatEnum.Day as string, this.getDay().toString())
+            .replace(DateTimeFormatEnum.TwentyFourHour as string, this.getHour() <= 9 ? `0${this.getHour()}` : this.getHour().toString())
+            .replace(DateTimeFormatEnum.TwoDigitsHour as string, this.getHour() <= 9 ? `0${this.getHour()}` : this.getHour() > 12 ? this.getHour().toString() : `${this.getHour() - 12 <= 9 ? '0' : ''}${this.getHour() - 12}`)
+            .replace(DateTimeFormatEnum.Hour as string, this.getHour() <= 9 ? `0${this.getHour()}` : this.getHour() > 12 ? this.getHour().toString() : `${this.getHour() - 12}`)
+            .replace(DateTimeFormatEnum.TwoDigitsMinute as string, this.getMinute() <= 9 ? `0${this.getMinute()}` : this.getMinute().toString())
+            .replace(DateTimeFormatEnum.Minute as string, this.getMinute().toString())
+            .replace(DateTimeFormatEnum.TwoDigitsSecond as string, this.getSecond() <= 9 ? `0${this.getSecond()}` : this.getSecond().toString())
+            .replace(DateTimeFormatEnum.Second as string, this.getSecond().toString())
     }
 }
