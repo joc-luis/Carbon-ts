@@ -3,6 +3,12 @@ A library to simplify handling dates and times in TypeScript.
 
 ## Usage
 
+### Installation
+
+````shell
+npm i carbon-ts
+````
+
 ### Create an instance
 
 ```ts
@@ -20,5 +26,9 @@ var dateTime = DateTime.now(TimeZoneEnum.AmericaMonterrey, LocaleEnum.enUS);
 
 // Add a day
 dateTime.addDay();
+
+// Difference in seconds.
+
+const diff = dateTime.diffInSeconds(otherDateTime)
 
 ```
