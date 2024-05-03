@@ -31,4 +31,27 @@ dateTime.addDay();
 
 const diff = dateTime.diffInSeconds(otherDateTime)
 
+// Format a date
+
+console.log(dateTime.toFormat("YYYY-MM-DD HH:mm:ss"))
+// Use DateTimeFormatEnum as reference
+
+export enum DateTimeFormatEnum {
+    FullYear= "YYYY",
+    TwoDigitsYear = "YY",
+    NameMonth = "MMM",
+    TwoDigitsMonth = "MM",
+    Month = "M",
+    NameDay = "DDD",
+    TwoDigitsDay = "DD",
+    Day = "D",
+    TwentyFourHour = "HH",
+    TwoDigitsHour = "hh",
+    Hour = "h",
+    TwoDigitsMinute = "mm",
+    Minute = "m",
+    TwoDigitsSecond = "ss",
+    Second = "s"
+}
+
 ```
