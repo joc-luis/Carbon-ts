@@ -34,9 +34,48 @@ export class DateTime {
      * Create a new instance with the specified time zone and format
      * @param timeZone Time zone for the instance
      * @param locale Specifies the format to use for the date
+     *
+     * @return A new instance of DateTime
      */
     public static now(timeZone: TimeZoneEnum = TimeZoneEnum.UTC, locale: LocaleEnum = LocaleEnum.enUS): DateTime {
         return new DateTime(timeZone, locale)
+    }
+
+
+    /**
+     * Creates a new instance with the data entered.
+     * @param year Year
+     * @param month Month
+     * @param day Day
+     * @param hour Hour
+     * @param minute Minute
+     * @param second Second
+     * @param timeZone Time zone for the instance
+     * @param locale Specifies the format to use for the date
+     *
+     * @return A new instance of DateTime
+     */
+    public static initialize(year: number, month: number, day: number, hour: number, minute: number, second: number,
+                             timeZone: TimeZoneEnum = TimeZoneEnum.UTC, locale: LocaleEnum = LocaleEnum.enUS) : DateTime {
+        const dateTime = new DateTime(timeZone, locale);
+        dateTime.setDateTime(year, month, day, hour, minute, second);
+
+        return dateTime;
+    }
+
+    /**
+     * Initialize a date and time from a date object
+     * @param date Value to assign
+     * @param timeZone Time zone for the instance
+     * @param locale Specifies the format to use for the date
+     *
+     * @return A new instance of DateTime
+     */
+    public static initializeFromDate(date: Date, timeZone: TimeZoneEnum = TimeZoneEnum.UTC, locale: LocaleEnum = LocaleEnum.enUS){
+        const dateTime = new DateTime(timeZone, locale);
+        dateTime.setFromDate(date);
+
+        return dateTime;
     }
 
 
@@ -61,6 +100,15 @@ export class DateTime {
      */
     public setDateTime(year: number, month: number, day: number, hour: number, minute: number, second: number): void {
         this.dateTime = new Date(year, month - 1, day, hour, minute, second);
+    }
+
+    /**
+     * Set the datetime from Date JS object
+     *
+     * @param date Value to assign
+     */
+    public setFromDate(date: Date){
+        this.dateTime = date;
     }
 
 
@@ -539,4 +587,24 @@ export class DateTime {
             .replace(DateTimeFormatEnum.NameDay as string, this.getDayName())
             .replace(DateTimeFormatEnum.NameMonth as string, this.getMonthName())
     }
+
+
+    /**
+     * Create a new instance based on the current one but changing the time zone
+     * @param timeZone Time zone for the new instance
+     *
+     * @return A new instance of DateTime
+     */
+    public toTimeZone(timeZone: TimeZoneEnum): DateTime {
+        const sampleDateTime = new Date(new Date().toLocaleString(this.locale as string, {timeZone: timeZone as string}))
+        const utcDateTime = new Date();
+        const diff = sampleDateTime.getUTCHours() - utcDateTime.getUTCHours();
+
+        const date = this.dateTime;
+        date.setHours(date.getHours() + diff);
+
+        return DateTime.initializeFromDate(date, timeZone, this.locale);
+    }
+
+
 }
