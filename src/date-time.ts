@@ -525,10 +525,8 @@ export class DateTime {
         return format
             .replace(DateTimeFormatEnum.FullYear as string, this.getYear().toString())
             .replace(DateTimeFormatEnum.TwoDigitsYear as string, this.getYear().toString().substring(2))
-            .replace(DateTimeFormatEnum.NameMonth as string, this.getMonthName())
             .replace(DateTimeFormatEnum.TwoDigitsMonth as string, this.getMonth() <= 9 ? `0${this.getMonth()}` : this.getMonth().toString())
             .replace(DateTimeFormatEnum.Month as string, this.getMonth().toString())
-            .replace(DateTimeFormatEnum.NameDay as string, this.getDayName())
             .replace(DateTimeFormatEnum.TwoDigitsDay as string, this.getDay() <= 9 ? `0${this.getDay()}` : this.getDay().toString())
             .replace(DateTimeFormatEnum.Day as string, this.getDay().toString())
             .replace(DateTimeFormatEnum.TwentyFourHour as string, this.getHour() <= 9 ? `0${this.getHour()}` : this.getHour().toString())
@@ -538,5 +536,7 @@ export class DateTime {
             .replace(DateTimeFormatEnum.Minute as string, this.getMinute().toString())
             .replace(DateTimeFormatEnum.TwoDigitsSecond as string, this.getSecond() <= 9 ? `0${this.getSecond()}` : this.getSecond().toString())
             .replace(DateTimeFormatEnum.Second as string, this.getSecond().toString())
+            .replace(DateTimeFormatEnum.NameDay as string, this.getDayName())
+            .replace(DateTimeFormatEnum.NameMonth as string, this.getMonthName())
     }
 }
