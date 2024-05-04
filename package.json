@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/joc-luis/Carbon-ts",
   "name": "carbon-ts",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "A datetime library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
