@@ -325,72 +325,105 @@ export class DateTime {
     /**
      * Get the difference in milliseconds of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Milliseconds of the difference.
      */
-    public diffInMilliseconds(dateTime: DateTime): number {
-        return this.getTotalMilliseconds() - dateTime.getTotalMilliseconds();
+    public diffInMilliseconds(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getTotalMilliseconds() - dateTime.getTotalMilliseconds()).toFixed(2));
     }
 
     /**
      * Get the difference in seconds of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Seconds of the difference.
      */
-    public diffInSeconds(dateTime: DateTime): number {
-        return this.getTotalSeconds() - dateTime.getTotalSeconds();
+    public diffInSeconds(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getTotalSeconds() - dateTime.getTotalSeconds()).toFixed(2));
     }
 
     /**
      * Get the difference in minutes of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Minutes of the difference.
      */
-    public diffInMinutes(dateTime: DateTime): number {
-        return this.getTotalMinutes() - dateTime.getTotalMinutes();
+    public diffInMinutes(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getTotalMinutes() - dateTime.getTotalMinutes()).toFixed(2));
     }
 
     /**
      * Get the difference in hours of two dates
-     * @param dateTime Date to compare
+     * @param dateTime Date to compare.
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Hours of the difference.
      */
-    public diffInHours(dateTime: DateTime): number {
-        return this.getTotalHours() - dateTime.getTotalHours();
+    public diffInHours(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getTotalHours() - dateTime.getTotalHours()).toFixed(2));
     }
 
     /**
      * Get the difference in days of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Days of the difference.
      */
-    public diffInDays(dateTime: DateTime): number {
-        return this.getTotalDays() - dateTime.getTotalDays();
+    public diffInDays(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getTotalDays() - dateTime.getTotalDays()).toFixed(2));
     }
 
     /**
      * Get the difference in months of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Months of the difference.
      */
-    public diffInMonths(dateTime: DateTime): number {
-        return this.getTotalMonths() - dateTime.getTotalMonths();
+    public diffInMonths(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getTotalMonths() - dateTime.getTotalMonths()).toFixed(2));
     }
 
     /**
      * Get the difference in years of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return Years of the difference.
      */
-    public diffInYears(dateTime: DateTime): number {
-        return this.getYear() - dateTime.getYear();
+    public diffInYears(dateTime: DateTime, ignoreTimeZone: boolean = false): number {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+        return Number((this.getYear() - dateTime.getYear()).toFixed(2));
     }
 
     /**
      * Get the difference in time of two dates
      * @param dateTime Date to compare
+     * @param ignoreTimeZone Ignore time zone when comparing
      * @return A time range object with the difference between the two dates.
      */
-    public diffInTime(dateTime: DateTime): TimeSpan {
+    public diffInTime(dateTime: DateTime, ignoreTimeZone: boolean = false): TimeSpan {
+        if (!ignoreTimeZone && this.getTimeZone() != dateTime.getTimeZone()) {
+            throw new Error("Time zones are not the same")
+        }
+
         let total = this.getTotalMilliseconds() - dateTime.getTotalMilliseconds()
         const timeSpan: TimeSpan = {
             days: 0,
@@ -422,7 +455,6 @@ export class DateTime {
         return timeSpan;
     }
 
-
     /**
      * Get the datetime of the instance in the format of the locale
      *
@@ -431,7 +463,6 @@ export class DateTime {
     public toString(): string {
         return this.convertToTimezone().toLocaleString()
     }
-
 
     /**
      * Get the time on 24 format
@@ -474,9 +505,15 @@ export class DateTime {
      * @return Datetime of the current instance
      */
     public toISO() {
-        return `${this.getYear()}-${this.getMonth() <= 9 ? '0'+this.getMonth() : this.getMonth()}-${this.getDay() <= 9 ? '0'+this.getDay() : this.getDay()}T${this.getTime()}.000Z`;
+        return `${this.getYear()}-${this.getMonth() <= 9 ? '0' + this.getMonth() : this.getMonth()}-${this.getDay() <= 9 ? '0' + this.getDay() : this.getDay()}T${this.getTime()}.000Z`;
     }
 
+    /**
+     * Get the datetime in the specific format
+     * @param format format string
+     *
+     * @return The date and time of the instance in the specified format
+     */
     public toFormat(format: string): string {
         return format
             .replace(DateTimeFormatEnum.FullYear as string, this.getYear().toString())
