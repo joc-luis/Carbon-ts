@@ -9,7 +9,14 @@ export class DateTime {
     private locale: LocaleEnum = LocaleEnum.enUS;
 
     private convertToTimezone(): Date {
-        return new Date(this.dateTime.toLocaleString(this.locale as string, {timeZone: this.timeZone as string}));
+        const sampleDateTime = new Date(new Date().toLocaleString(this.locale as string, {timeZone: this.timeZone as string}))
+        const utcDateTime = new Date();
+        const diff = sampleDateTime.getUTCHours() - utcDateTime.getUTCHours();
+
+        const date = this.dateTime;
+        date.setHours(date.getHours() + diff);
+
+        return date;
     }
 
     /**
