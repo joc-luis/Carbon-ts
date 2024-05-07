@@ -10,7 +10,7 @@
     "README.md"
   ],
   "scripts": {
-    "start": "tsc src/index.ts && node src/index.js",
+    "test": "jest",
     "build": "npx tsc",
     "prerelease": "npm run build && npm version prerelease && npm publish",
     "patch": "npm run build && npm version patch && npm publish",
@@ -24,7 +24,10 @@
   "author": "joc-luis",
   "license": "MIT",
   "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
     "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "typescript": "^5.4.5"
   }
 }
